@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public final class AutoMessage extends JavaPlugin {
     private static AutoMessage instance;
@@ -22,11 +21,15 @@ public final class AutoMessage extends JavaPlugin {
         // Plugin startup logic
         instance = this;
 
-        Objects.requireNonNull(getCommand("automessage")).setExecutor(new automessage());
-
         saveDefaultConfig(); // Save default config if it doesn't exist
         config = getConfig();
         messages = config.getStringList("Messages");
+
+        try{
+            getCommand("automessage").setExecutor(new automessage());
+        } catch (Exception e){
+            getServer().getLogger().warning("Niečo sa nepodarilo, automessage failol :O.");
+        }
 
         if (!messages.isEmpty()) {
             startMessageCycle();
