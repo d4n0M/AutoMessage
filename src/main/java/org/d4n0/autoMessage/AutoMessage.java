@@ -2,6 +2,7 @@ package org.d4n0.autoMessage;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,15 +22,12 @@ public final class AutoMessage extends JavaPlugin {
         // Plugin startup logic
         instance = this;
 
-        saveDefaultConfig(); // Save default config if it doesn't exist
+        this.saveDefaultConfig(); // Save default config if it doesn't exist
         config = getConfig();
         messages = config.getStringList("Messages");
 
-        try{
-            getCommand("automessage").setExecutor(new automessage());
-        } catch (Exception e){
-            getServer().getLogger().warning("Niečo sa nepodarilo, automessage failol :O.");
-        }
+        this.getCommand("automessage").setExecutor(new automessage());
+        this.getCommand("setdelay").setExecutor(new setdelay());
 
         if (!messages.isEmpty()) {
             startMessageCycle();
@@ -46,6 +44,8 @@ public final class AutoMessage extends JavaPlugin {
     public static FileConfiguration getPluginConfig() {
         return config;
     }
+
+
 
     public static AutoMessage getInstance() {
         return instance;

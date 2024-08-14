@@ -5,13 +5,20 @@ api-version: '1.20'
 commands:
   automessage:
     description: "Add or delete messages"
-    permissions:
-      automessage.add:
-        description: "Allows the addition of new messages"
-        default: op
-      automessage.delete:
-        description: "Allows the deletion of messages"
-        default: op
-      automessage.restart:
-        description: "Allows the user to restart the message cycle"
-        default: op
+    usage: /automessage <add/remove/restart> <správa>
+  setdelay:
+    description: "Nastav delay správ v sekundách"
+    usage: /setdelay <delay>
+permissions:
+  automessage.add:
+    description: "Allows the addition of new messages"
+    default: op
+  automessage.delete:
+    description: "Allows the deletion of messages"
+    default: op
+  automessage.restart:
+    description: "Allows the user to restart the message cycle"
+    default: op
+  automessage.setdelay:
+    description: "Set delay between messages"
+    default: op

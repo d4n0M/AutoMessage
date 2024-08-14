@@ -17,13 +17,18 @@ public class automessage implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        AutoMessage instance = AutoMessage.getInstance();
         FileConfiguration config = AutoMessage.getPluginConfig();
         List<String> messages = AutoMessage.getMessages();
         Player player;
 
-        if (commandSender instanceof Player) {
-            player = (Player) commandSender;
-        } else {
+        try {
+            if (commandSender instanceof Player) {
+                player = (Player) commandSender;
+            } else {
+                return true;
+            }
+        }catch (Exception e){
             return true;
         }
 
@@ -63,7 +68,9 @@ public class automessage implements CommandExecutor, TabCompleter {
                 player.sendMessage(ChatColor.RED + "Správa nebola nájdená");
             }
             return true;
-        } else {
+        } else if (!(strings[0].equalsIgnoreCase("remove") || strings[0].equalsIgnoreCase("restart") || strings[0].equalsIgnoreCase("add"))){
+            player.sendMessage(ChatColor.RED + "Zlý argument");
+        }else{
             player.sendMessage(ChatColor.RED + "Nemáš práva na použitie tohto príkazu");
         }
 

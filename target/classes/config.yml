@@ -2,5 +2,6 @@
 DelayBetween: 3
 #Messages to loop over
 Messages:
+  - "adasdsadada"
   #- "Ahoj ako sa mas"
   #- "Dobre a ty?"
